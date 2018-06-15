@@ -1,0 +1,3 @@
+name: hextech-gateway
+main: com.hextechsheep.hextech.gateway.Gateway
+version: 0.0.1-SNAPSHOT

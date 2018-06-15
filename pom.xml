@@ -15,6 +15,7 @@
 	<modules>
 		<module>hextech-common</module>
 		<module>hextech-green-sheep</module>
+		<module>hextech-gateway</module>
 	</modules>
 
 	<licenses>

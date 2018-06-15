@@ -14,4 +14,18 @@
 	<name>hextech-common</name>
 	<description>Common utilities for hextech plugins</description>
 	<url>https://github.com/hextech-sheep/hextech</url>
+
+	<dependencies>	
+		<dependency>
+			<groupId>com.hextechsheep.hextech</groupId>
+			<artifactId>hextech-green-sheep</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.hextechsheep.hextech</groupId>
+			<artifactId>hextech-gateway</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
 </project>
