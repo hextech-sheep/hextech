@@ -14,11 +14,4 @@
 	<name>hextech-common</name>
 	<description>Common utilities for hextech plugins</description>
 	<url>https://github.com/hextech-sheep/hextech</url>
-
-	<dependencies>
-		<dependency>
-			<groupId>org.bukkit</groupId>
-			<artifactId>bukkit</artifactId>
-		</dependency>
-	</dependencies>
 </project>

@@ -74,7 +74,6 @@
 		<slf4j.version>1.7.25</slf4j.version>
 		<guava.version>21.0</guava.version> <!-- Minecraft bundles this version -->
 		<spigot.version>1.12.2-R0.1-SNAPSHOT</spigot.version>
-		<bukkit.version>1.12.2-R0.1-SNAPSHOT</bukkit.version>
 	</properties>
 
 	<dependencyManagement>
@@ -104,12 +103,6 @@
 				<groupId>org.spigotmc</groupId>
 				<artifactId>spigot-api</artifactId>
 				<version>${spigot.version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.bukkit</groupId>
-				<artifactId>bukkit</artifactId>
-				<version>${bukkit.version}</version>
 				<scope>provided</scope>
 			</dependency>
 		</dependencies>
