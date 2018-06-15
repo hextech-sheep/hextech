@@ -16,7 +16,6 @@ import com.google.common.io.CharSource;
 import com.google.common.io.Resources;
 
 public class Hextech extends JavaPlugin {
-    private static final List<JavaPlugin> COMPONENTS = getComponents();
     private static final Logger LOGGER = LoggerFactory.getLogger(Hextech.class);
 
     private static List<JavaPlugin> getComponents() {
@@ -53,6 +52,8 @@ public class Hextech extends JavaPlugin {
             return (JavaPlugin)component;
         }).filter(Objects::nonNull).collect(Collectors.toList());
     }
+
+    private final List<JavaPlugin> COMPONENTS = getComponents();
 
     @Override
     public void onDisable() {

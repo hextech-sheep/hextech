@@ -22,7 +22,6 @@ import com.google.common.io.CharSource;
 import com.google.common.io.Resources;
 
 public class SheepListener implements Listener {
-    private static final List<String> INSULTS = loadInsults();
     private static final Logger LOGGER = LoggerFactory.getLogger(SheepListener.class);
     private static final Random RANDOM = new Random();
 
@@ -35,6 +34,8 @@ public class SheepListener implements Listener {
             return Collections.emptyList();
         }
     }
+
+    private final List<String> INSULTS = loadInsults();
 
     @EventHandler
     public void onCreatureSpawn(final CreatureSpawnEvent event) {
