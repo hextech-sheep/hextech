@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
@@ -12,13 +12,13 @@ import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Sheep;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.SheepDyeWoolEvent;
 import org.bukkit.event.entity.SheepRegrowWoolEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,19 +39,20 @@ public class GreenSheep extends JavaPlugin {
             }
         }
 
-        @EventHandler(priority = EventPriority.LOWEST)
+        @EventHandler
         public void onSheepDyeWool(final SheepDyeWoolEvent event) {
             if(event.getColor() != GreenSheep.GREEN) {
-                event.setColor(GreenSheep.GREEN);
-
                 if(insults != null && !insults.isEmpty()) {
-                    final String insult = insults.get(RANDOM.nextInt(insults.size()));
+                    final String insult = insults.get(ThreadLocalRandom.current().nextInt(insults.size()));
                     Bukkit.broadcastMessage(insult);
                 }
-            }
-
-            if(event.getEntity().getColor() != GREEN) {
-                event.getEntity().setColor(GREEN);
+                
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        event.getEntity().setHealth(0.0);
+                    }
+                }.runTaskLater(GreenSheep.this, ThreadLocalRandom.current().nextLong(MINIMUM_DEATH_TICKS, MAXIMUM_DEATH_TICKS + 1L));
             }
         }
 
@@ -66,7 +67,8 @@ public class GreenSheep extends JavaPlugin {
     private static final DyeColor GREEN = DyeColor.LIME;
     private static final String INSULTS_PATH = "/com/hextechsheep/hextech/greensheep/insults.txt";
     private static final Logger LOGGER = LoggerFactory.getLogger(GreenSheep.class);
-    private static final Random RANDOM = new Random();
+    private static final long MINIMUM_DEATH_TICKS = 200L; // Roughly 10 seconds
+    private static final long MAXIMUM_DEATH_TICKS = 1200L; // Roughly 1 minute
 
     private static List<String> loadInsults() {
         final CharSource insults = Resources.asCharSource(SheepListener.class.getResource(INSULTS_PATH), Charset.forName("UTF-8"));
@@ -89,7 +91,7 @@ public class GreenSheep extends JavaPlugin {
         final DyeColor[] colors = DyeColor.values();
         for(final World world : Bukkit.getWorlds()) {
             for(final Sheep sheep : world.getEntitiesByClass(Sheep.class)) {
-                final DyeColor color = colors[RANDOM.nextInt(colors.length)];
+                final DyeColor color = colors[ThreadLocalRandom.current().nextInt(colors.length)];
                 if(sheep.getColor() != color) {
                     sheep.setColor(color);
                 }
