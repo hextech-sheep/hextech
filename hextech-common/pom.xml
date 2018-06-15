@@ -9,31 +9,16 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>hextech</artifactId>
+	<artifactId>hextech-common</artifactId>
 
-	<name>hextech</name>
-	<description>The full suite of hextech plugins for the Riot API Developer Community Minecraft Server</description>
+	<name>hextech-common</name>
+	<description>Common utilities for hextech plugins</description>
 	<url>https://github.com/hextech-sheep/hextech</url>
 
 	<dependencies>
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.bukkit</groupId>
 			<artifactId>bukkit</artifactId>
-		</dependency>
-		
-		<!-- Component Plugins -->
-		<dependency>
-			<groupId>com.hextechsheep.hextech</groupId>
-			<artifactId>hextech-green-sheep</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 </project>

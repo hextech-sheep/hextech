@@ -1,4 +1,3 @@
 name: Hextech
 main: com.hextechsheep.hextech.Hextech
 version: 0.0.1-SNAPSHOT
-commands:

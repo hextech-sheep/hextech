@@ -9,10 +9,10 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>hextech</artifactId>
+	<artifactId>hextech-green-sheep</artifactId>
 
-	<name>hextech</name>
-	<description>The full suite of hextech plugins for the Riot API Developer Community Minecraft Server</description>
+	<name>hextech-green-sheep</name>
+	<description>The sheep must all be green</description>
 	<url>https://github.com/hextech-sheep/hextech</url>
 
 	<dependencies>
@@ -28,12 +28,9 @@
 			<groupId>org.bukkit</groupId>
 			<artifactId>bukkit</artifactId>
 		</dependency>
-		
-		<!-- Component Plugins -->
 		<dependency>
-			<groupId>com.hextechsheep.hextech</groupId>
-			<artifactId>hextech-green-sheep</artifactId>
-			<version>${project.version}</version>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
 		</dependency>
 	</dependencies>
 </project>
