@@ -24,9 +24,10 @@ import com.google.common.io.Resources;
 public class SheepListener implements Listener {
     private static final Logger LOGGER = LoggerFactory.getLogger(SheepListener.class);
     private static final Random RANDOM = new Random();
+    private static final String INSULTS_PATH = "/com/hextechsheep/hextech/greensheep/insults.txt";
 
     private static List<String> loadInsults() {
-        final CharSource insults = Resources.asCharSource(Resources.getResource("com/hextechsheep/hextech/greensheep/insults.txt"), Charset.forName("UTF-8"));
+        final CharSource insults = Resources.asCharSource(SheepListener.class.getResource(INSULTS_PATH), Charset.forName("UTF-8"));
         try {
             return insults.readLines();
         } catch(final IOException e) {
