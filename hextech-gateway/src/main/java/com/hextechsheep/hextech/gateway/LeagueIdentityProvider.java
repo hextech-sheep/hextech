@@ -1,14 +1,10 @@
 package com.hextechsheep.hextech.gateway;
 
-import java.io.File;
-
-import com.merakianalytics.orianna.Orianna;
 import com.merakianalytics.orianna.types.common.Region;
 import com.merakianalytics.orianna.types.core.summoner.Summoner;
 import com.merakianalytics.orianna.types.core.thirdpartycode.VerificationString;
 
-public class LeagueIdentityProvider {
-    
+public class LeagueIdentityProvider {    
     // Get Summoner name for user
     public String getSummonerName(String username) {
         // get from DB
@@ -35,7 +31,7 @@ public class LeagueIdentityProvider {
         final Summoner summoner = Summoner.named(summonerName).withRegion(region).get();
         final VerificationString verification = summoner.getVerificationString();
         // Compare
-        if (token == verification.toString()) {
+        if (token.equals(verification.getString())) {
             // Store summoner info in DB
             return true;
         } else {
