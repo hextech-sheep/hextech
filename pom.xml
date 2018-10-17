@@ -13,7 +13,6 @@
 	<url>https://github.com/hextech-sheep/hextech</url>
 
 	<modules>
-		<module>hextech</module>
 		<module>hextech-common</module>
 		<module>hextech-green-sheep</module>
 	</modules>
@@ -73,7 +72,7 @@
 		<junit.version>4.12</junit.version>
 		<slf4j.version>1.7.25</slf4j.version>
 		<guava.version>21.0</guava.version> <!-- Minecraft bundles this version -->
-		<spigot.version>1.12.2-R0.1-SNAPSHOT</spigot.version>
+		<spigot.version>1.13.1-R0.1-SNAPSHOT</spigot.version>
 	</properties>
 
 	<dependencyManagement>
@@ -98,6 +97,7 @@
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
 				<version>${guava.version}</version>
+				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.spigotmc</groupId>
