@@ -12,6 +12,7 @@ import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.JsonObjectParser;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
+
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
@@ -95,8 +96,8 @@ public class Gateway extends JavaPlugin {
             final String name = event.getName();
             LOGGER.info(name + " is wanting to join!");
             Bukkit.broadcastMessage(name + " is wanting to join!");
-            event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_WHITELIST, "Go to <url> to authenticate with Discord.");
-//            event.allow();
+//            event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_WHITELIST, "Go to <url> to authenticate with Discord.");
+            event.allow();
         }
     }
 
@@ -112,5 +113,7 @@ public class Gateway extends JavaPlugin {
     public void onEnable() {
         LOGGER.info("Enabling Hextech Gateway");
         getServer().getPluginManager().registerEvents(listener, this);
+        this.getCommand("leagueconnect").setExecutor(new CommandLeagueConnect());
+        this.getCommand("leagueverify").setExecutor(new CommandLeagueVerify());
     }
 }
