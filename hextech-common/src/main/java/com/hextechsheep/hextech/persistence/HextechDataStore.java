@@ -2,6 +2,8 @@ package com.hextechsheep.hextech.persistence;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.msgpack.jackson.dataformat.MessagePackFactory;
 
@@ -24,8 +26,38 @@ public class HextechDataStore implements AutoCloseable {
     public static class Configuration {
         private String dataDirectory = Paths.get(System.getProperty("user.home"), ".hextech", "data").toString();
 
+        @Override
+        public boolean equals(final Object obj) {
+            if(this == obj) {
+                return true;
+            }
+            if(obj == null) {
+                return false;
+            }
+            if(getClass() != obj.getClass()) {
+                return false;
+            }
+            final Configuration other = (Configuration)obj;
+            if(dataDirectory == null) {
+                if(other.dataDirectory != null) {
+                    return false;
+                }
+            } else if(!dataDirectory.equals(other.dataDirectory)) {
+                return false;
+            }
+            return true;
+        }
+
         public String getDataDirectory() {
             return dataDirectory;
+        }
+
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + (dataDirectory == null ? 0 : dataDirectory.hashCode());
+            return result;
         }
 
         public void setDataDirectory(final String dataDirectory) {
@@ -64,6 +96,8 @@ public class HextechDataStore implements AutoCloseable {
         }
     }
 
+    private static final Map<Configuration, HextechDataStore> instances = new HashMap<>();
+
     private static final ObjectMapper MAPPER =
         new ObjectMapper(new MessagePackFactory()).disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES).setSerializationInclusion(Include.NON_DEFAULT);
 
@@ -71,6 +105,27 @@ public class HextechDataStore implements AutoCloseable {
 
     private static <T> T fromByteIterable(final Class<T> type, final ByteIterable value) throws JsonParseException, JsonMappingException, IOException {
         return MAPPER.readValue(value.getBytesUnsafe(), type);
+    }
+
+    public static HextechDataStore getInstance(final Configuration configuration) {
+        HextechDataStore instance = instances.get(configuration);
+        if(instance == null) {
+            synchronized(instances) {
+                instance = instances.get(configuration);
+                if(instance == null) {
+                    final HextechDataStore newInstance = new HextechDataStore(configuration);
+                    instances.put(configuration, newInstance);
+
+                    Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                        if(newInstance.isOpen()) {
+                            newInstance.close();
+                        }
+                    }));
+                    instance = newInstance;
+                }
+            }
+        }
+        return instance;
     }
 
     private static <T> ByteIterable toByteIterable(final T value) throws JsonProcessingException {
@@ -90,6 +145,10 @@ public class HextechDataStore implements AutoCloseable {
     @Override
     public void close() {
         xodus.close();
+    }
+
+    public boolean isOpen() {
+        return xodus.isOpen();
     }
 
     public Transaction open(final String table) {
