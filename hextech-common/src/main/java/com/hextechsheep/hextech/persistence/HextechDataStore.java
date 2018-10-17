@@ -79,6 +79,10 @@ public class HextechDataStore implements AutoCloseable {
             transaction.commit();
         }
 
+        public void delete(final String key) {
+            store.delete(transaction, StringBinding.stringToEntry(key));
+        }
+
         public <T> T get(final Class<T> type, final String key) {
             try {
                 return fromByteIterable(type, store.get(transaction, StringBinding.stringToEntry(key)));
@@ -104,7 +108,10 @@ public class HextechDataStore implements AutoCloseable {
     private static final StoreConfig STORE_CONFIG = StoreConfig.WITHOUT_DUPLICATES_WITH_PREFIXING;
 
     private static <T> T fromByteIterable(final Class<T> type, final ByteIterable value) throws JsonParseException, JsonMappingException, IOException {
-        return MAPPER.readValue(value.getBytesUnsafe(), type);
+        if(value != null) {
+            return MAPPER.readValue(value.getBytesUnsafe(), type);
+        }
+        return null;
     }
 
     public static HextechDataStore getInstance() {

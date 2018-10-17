@@ -83,6 +83,11 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
+				<groupId>com.hextechsheep.hextech</groupId>
+				<artifactId>hextech-common</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 				<version>${junit.version}</version>
@@ -114,6 +119,11 @@
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-databind</artifactId>
 				<version>${jackson.version}</version>
+			</dependency>
+			<dependency>
+			    <groupId>com.fasterxml.jackson.core</groupId>
+			    <artifactId>jackson-core</artifactId>
+			    <version>${jackson.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.msgpack</groupId>
