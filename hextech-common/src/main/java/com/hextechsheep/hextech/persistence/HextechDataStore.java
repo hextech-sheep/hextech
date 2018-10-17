@@ -107,6 +107,10 @@ public class HextechDataStore implements AutoCloseable {
         return MAPPER.readValue(value.getBytesUnsafe(), type);
     }
 
+    public static HextechDataStore getInstance() {
+        return getInstance(new Configuration());
+    }
+
     public static HextechDataStore getInstance(final Configuration configuration) {
         HextechDataStore instance = instances.get(configuration);
         if(instance == null) {
