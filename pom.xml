@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -74,6 +75,9 @@
 		<slf4j.version>1.7.25</slf4j.version>
 		<guava.version>21.0</guava.version> <!-- Minecraft bundles this version -->
 		<spigot.version>1.13.1-R0.1-SNAPSHOT</spigot.version>
+		<jackson.version>2.9.7</jackson.version>
+		<msgpack.version>0.8.16</msgpack.version>
+		<xodus.version>1.2.3</xodus.version>
 	</properties>
 
 	<dependencyManagement>
@@ -105,6 +109,26 @@
 				<artifactId>spigot-api</artifactId>
 				<version>${spigot.version}</version>
 				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.msgpack</groupId>
+				<artifactId>jackson-dataformat-msgpack</artifactId>
+				<version>${msgpack.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jetbrains.xodus</groupId>
+				<artifactId>xodus-openAPI</artifactId>
+				<version>${xodus.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jetbrains.xodus</groupId>
+				<artifactId>xodus-entity-store</artifactId>
+				<version>${xodus.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
