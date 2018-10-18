@@ -21,7 +21,7 @@ public class CommandLeagueConnect implements CommandExecutor {
                 sender.sendMessage("Something went wrong: Player not found :/");
                 return false;
             }
-            String token = leagueIdentityProvider.beginVerification(playerId);
+            String token = leagueIdentityProvider.createVerificationToken(playerId);
             if (token == null) {
                 sender.sendMessage("Something went wrong: Verification token couldn't be generated :/");
                 return false;

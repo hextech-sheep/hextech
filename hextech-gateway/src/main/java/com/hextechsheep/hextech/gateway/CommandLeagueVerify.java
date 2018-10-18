@@ -22,7 +22,7 @@ public class CommandLeagueVerify implements CommandExecutor {
             if (playerId == null) {
                 return false;
             }
-            boolean verified = leagueIdentityProvider.performVerification(playerId, "WxWatch", Region.NORTH_AMERICA);
+            boolean verified = leagueIdentityProvider.verifyToken(playerId, "WxWatch", Region.NORTH_AMERICA);
             if (verified) {
                 player.sendMessage("Successfully verified!");
             } else {

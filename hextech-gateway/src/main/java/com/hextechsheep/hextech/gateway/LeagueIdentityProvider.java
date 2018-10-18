@@ -14,14 +14,14 @@ public class LeagueIdentityProvider {
     }
 
     // Make verification token to give to user
-    public String beginVerification(UUID minecraftId) {
+    public String createVerificationToken(UUID minecraftId) {
         final String token = generateVerificationToken();
         storeVerificationToken(minecraftId, token);
         
         return token;
     }
     
-    public boolean performVerification(UUID minecraftId, String summonerName, Region region) {
+    public boolean verifyToken(UUID minecraftId, String summonerName, Region region) {
         final String token = getVerificationToken(minecraftId);
         final Summoner summoner = Summoner.named(summonerName).withRegion(region).get();
         final VerificationString verification = summoner.getVerificationString();
