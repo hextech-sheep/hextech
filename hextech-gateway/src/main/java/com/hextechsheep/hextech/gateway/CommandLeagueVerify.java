@@ -7,6 +7,8 @@ import org.bukkit.entity.Player;
 
 import com.merakianalytics.orianna.types.common.Region;
 
+import java.util.UUID;
+
 public class CommandLeagueVerify implements CommandExecutor {
     final LeagueIdentityProvider leagueIdentityProvider = new LeagueIdentityProvider();
     
@@ -16,11 +18,11 @@ public class CommandLeagueVerify implements CommandExecutor {
             sender.sendMessage("This command can only be run by a player");
         } else {
             Player player = (Player) sender;
-            String username = player.getName();
-            if (username == null) {
+            UUID playerId = player.getUniqueId();
+            if (playerId == null) {
                 return false;
             }
-            boolean verified = leagueIdentityProvider.performVerification(username, "WxWatch", Region.NORTH_AMERICA);
+            boolean verified = leagueIdentityProvider.performVerification(playerId, "WxWatch", Region.NORTH_AMERICA);
             if (verified) {
                 player.sendMessage("Successfully verified!");
             } else {

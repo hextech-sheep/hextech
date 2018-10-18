@@ -2,6 +2,7 @@ package com.hextechsheep.hextech.gateway;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import com.hextechsheep.hextech.persistence.HextechDataStore;
 import com.hextechsheep.hextech.persistence.HextechDataStore.Transaction;
@@ -54,6 +55,8 @@ public class IdentityManager {
             return Summoner.withAccountId(Long.parseLong(accountId)).withPlatform(Platform.withTag(platform)).get();
         }
 
+        public String getLeagueVerifyToken() { return identities.get(LEAGUE_VERIFY_TOKEN); }
+
         public void setMinecraftId(final String minecraftId) {
             if(minecraftId == null) {
                 throw new IllegalArgumentException("minecraft id must not be null!");
@@ -83,11 +86,19 @@ public class IdentityManager {
                 transaction.put(identities.get(MINECRAFT_ID), identities);
             }
         }
+
+        public void setLeagueVerifyToken(final String token) {
+            identities.put(LEAGUE_VERIFY_TOKEN, token);
+            try(Transaction transaction = dataStore.open(tableName)) {
+                transaction.put(identities.get(MINECRAFT_ID), identities);
+            }
+        }
     }
 
     private static final String DEFAULT_TABLE_NAME = "hextech-gateway.identity-manager";
     private static final String LEAGUE_ACCOUNT_ID = "league-account-id";
     private static final String LEAGUE_PLATFORM = "league-platform";
+    private static final String LEAGUE_VERIFY_TOKEN = "league-verify-token";
     private static final String MINECRAFT_ID = "minecraft-id";
     private static final String MINECRAFT_NAME = "minecraft-name";
     private final HextechDataStore dataStore;
