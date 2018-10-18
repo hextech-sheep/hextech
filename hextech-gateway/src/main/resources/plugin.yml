@@ -1,0 +1,10 @@
+name: hextech-gateway
+main: com.hextechsheep.hextech.gateway.Gateway
+version: 0.0.1-SNAPSHOT
+commands:
+   leagueconnect:
+      description: Connect your League of Legends account to Green Sheep Minecraft
+      usage: /leagueconnect
+   leagueverify:
+      description: Verify your League of Legends
+      usage: /leagueverify
