@@ -24,7 +24,7 @@ public class CommandLeagueVerify implements CommandExecutor {
                 return false;
             }
 
-            if (args.length == 0 && args.length == 1) {
+            if (args.length == 0 || args.length == 1) {
                 return false;
             }
 

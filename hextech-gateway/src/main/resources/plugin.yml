@@ -7,4 +7,4 @@ commands:
       usage: /leagueconnect
    leagueverify:
       description: Verify your League of Legends
-      usage: /leagueverify
+      usage: /leagueverify [Summoner Name] [Region]
